@@ -1,0 +1,72 @@
+% Joseph Garcia
+
+% ECE 498 Take-Home Mid-Term Exam
+
+% 3/22/2016
+
+
+1a.) d = sqrt(sum((a - b).^(2)))
+
+1b.) m2 = m1(:,[2:4])
+
+1c.) a_sort_ascend = sortrows(a,2) 
+
+1d.) a(a(:,2) < 60 ,:) = []
+
+1e.) a(a(:,2) >= 80 ,2) = 100
+
+2.)  (SEE BELOW)
+
+function positive = always_positive(x, y)
+%UNTITLED Summary of this function goes here
+%   Detailed explanation goes here
+
+if ((x >= 0) & (y >= 0))
+    positive = x + y;
+elseif((x >= 0) & (y < 0))
+    positive = x + y^(2);
+elseif((x < 0) & (y >= 0))
+    positive = x^(2) + y;
+else ((x < 0) & (y < 0)) 
+    positive = x^(2) + y^(2);
+
+end
+
+end
+
+3.)  (SEE BELOW)
+
+x = linspace(-5.12,5.12,100);                %set up arrays for the x-y grid 
+y = linspace(-5.12,5.12,100);
+
+anon_f = @(x,y) (20 + x.^(2) - 10*cos(2*pi*x) + y.^(2) - 10*cos(2*pi*y));   % (1)  create anonymous Rastrigin function
+[X, Y] = meshgrid(x, y);                                                    % (2)  create a meshgrid for an x,y "matrix"       
+Z = anon_f(X, Y);                              % (3)  evaluate Rastrigin function at each point in the meshgrid
+
+ %        AN ALTERNATIVE for Lines 1, 2, and 3
+%        [X,Y] = meshgrid(x, y);                              % create x,y "matrix"
+%        Z = 20 + X.^(2) - 10*cos(2*pi*X) + Y.^(2) - 10*cos(2*pi*Y);  % evaluate Rastrigin at each point in the x,y "matrix"
+%        surf(X,Y,Z)                    % plot 3-D surface of the Rastrigin function
+ 
+surfc(X,Y,Z,'FaceColor','interp','EdgeColor','none','FaceLighting','gouraud');  % plot surface contour plot
+colormap('jet');               % set colormap to jet
+camlight('headlight');         % shines a light on the plot (coming from the camera)
+
+xlim([-5.12 5.12]);
+ylim([-5.12 5.12]);                               % set x, y, and z limits
+zlim([ (min(Z(:)) - 5) (max(Z(:)) + 5)])
+
+xlabel('x');
+ylabel('y');                  % set the axes' labels
+zlabel('z');
+
+
+4a.) (SEE BELOW)
+
+a = {'abc', [1 2 3; 4 5 6]; 4, [9 8 7; 6 5 4; 3 2 1]}
+
+a{1,2}(2,:) = a{1,2}(2,:) + 4; 
+
+4b.)  (SEE BELOW)
+
+b = reshape(a,[1,4])
